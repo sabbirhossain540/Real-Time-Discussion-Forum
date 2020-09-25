@@ -49,6 +49,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
+        //return from Question Resource file
         return new QuestionResource($question);
     }
 
@@ -72,7 +73,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->update($request->all());
+        return response("Updated Successfully");
     }
 
     /**
