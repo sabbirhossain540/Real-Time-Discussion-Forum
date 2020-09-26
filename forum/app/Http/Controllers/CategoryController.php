@@ -66,7 +66,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $data = [];
+        $data['name'] = $request->name;
+        $data['slug'] = str_slug($request->name);
+
+        $category->update($data);
+        return response("Update Done");
     }
 
     /**
