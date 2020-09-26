@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Reply;
 use Illuminate\Http\Request;
 use App\Model\Question;
+use App\Http\Resources\ReplyResource;
 
 class ReplyController extends Controller
 {
@@ -15,7 +16,7 @@ class ReplyController extends Controller
      */
     public function index(Question $question)
     {
-        return $question->replies;
+        return ReplyResource::collection($question->replies);
         //return Reply::latest()->get();
     }
 
@@ -49,7 +50,7 @@ class ReplyController extends Controller
      */
     public function show(Question $question, Reply $reply)
     {
-        return $reply;
+        return new ReReplyResource($reply);
     }
 
     /**
