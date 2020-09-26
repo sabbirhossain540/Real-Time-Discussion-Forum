@@ -14,18 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Category::latest()->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +26,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Category::create($request->all());
+
+        $category = new Category;
+        $category->name = $request->name;
+        $category->slug = str_slug($request->name);
+        $category->save();
+        return response('Created Successfully');
     }
 
     /**
@@ -46,7 +43,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -80,6 +77,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response("Deleted Successfully");
     }
 }
