@@ -7,21 +7,26 @@
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
       <v-toolbar-title>SPA Forum</v-toolbar-title>
+       <v-spacer></v-spacer>
 
-      <v-spacer></v-spacer>
+      <v-toolbar-item>
+          <v-btn flat>
+                Forum
+            </v-btn>
+            <v-btn flat>
+                Ask Question
+            </v-btn>
+            <v-btn flat>
+                Category
+            </v-btn>
+            <v-btn flat>
+                Login
+            </v-btn>
+      </v-toolbar-item>
 
-      <v-btn>
-          Forum
-      </v-btn>
-      <v-btn flat>
-          Ask Question
-      </v-btn>
-      <v-btn flat>
-          Category
-      </v-btn>
-      <v-btn flat>
-          Login
-      </v-btn>
+     
+
+      
 
     
     </v-toolbar>
