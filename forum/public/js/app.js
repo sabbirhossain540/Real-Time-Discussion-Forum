@@ -2052,10 +2052,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      questions: {}
+    };
+  },
   components: {
     question: _question__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/question').then(function (res) {
+      return _this.questions = res.data.data;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
   }
 });
 
@@ -2084,7 +2100,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['data']
+});
 
 /***/ }),
 
@@ -37984,7 +38005,17 @@ var render = function() {
         "v-layout",
         { attrs: { row: "", wrap: "" } },
         [
-          _c("v-flex", { attrs: { xs8: "" } }, [_c("question")], 1),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            _vm._l(_vm.questions, function(question) {
+              return _c("question", {
+                key: question.path,
+                attrs: { data: question }
+              })
+            }),
+            1
+          ),
           _vm._v("\n    fdvgf\n  ")
         ],
         1
@@ -38020,15 +38051,26 @@ var render = function() {
     [
       _c("v-card-title", { attrs: { "primary-title": "" } }, [
         _c("div", [
-          _c("h3", { staticClass: "headline mb-0" }, [
-            _vm._v("Title Of Question")
-          ]),
+          _c(
+            "h3",
+            { staticClass: "headline mb-0" },
+            [
+              _c("router-link", { attrs: { to: _vm.data.path } }, [
+                _vm._v(_vm._s(_vm.data.title))
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "grey--text" }, [_vm._v("Said 4 Hours Ago")])
+          _c("div", { staticClass: "grey--text" }, [
+            _vm._v(_vm._s(_vm.data.created_at))
+          ])
         ])
       ]),
       _vm._v(" "),
-      _c("v-card-text", [_vm._v("\n        body\n    ")])
+      _c("v-card-text", [
+        _vm._v("\n        " + _vm._s(_vm.data.body) + "\n    ")
+      ])
     ],
     1
   )

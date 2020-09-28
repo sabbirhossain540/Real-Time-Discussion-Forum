@@ -20,7 +20,7 @@ class Question extends Model
 
 	//For get url. Its using in Question Resource File
 	public function getPathAttribute(){
-		return asset("api/question/$this->slug");
+		return "api/question/$this->slug";
 	}
 
     public function user(){
