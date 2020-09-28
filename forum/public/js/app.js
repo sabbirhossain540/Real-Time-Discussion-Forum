@@ -37725,22 +37725,16 @@ var render = function() {
           _c(
             "v-toolbar-item",
             [
-              _c("v-btn", { attrs: { flat: "" } }, [
-                _vm._v("\n              Forum\n          ")
-              ]),
+              _c("v-btn", [_vm._v("\n              Forum\n          ")]),
               _vm._v(" "),
-              _c("v-btn", { attrs: { flat: "" } }, [
-                _vm._v("\n              Ask Question\n          ")
-              ]),
+              _c("v-btn", [_vm._v("\n              Ask Question\n          ")]),
               _vm._v(" "),
-              _c("v-btn", { attrs: { flat: "" } }, [
-                _vm._v("\n              Category\n          ")
-              ]),
+              _c("v-btn", [_vm._v("\n              Category\n          ")]),
               _vm._v(" "),
               _c(
                 "router-link",
                 { attrs: { to: "/login" } },
-                [_c("v-btn", { attrs: { flat: "" } }, [_vm._v("Login")])],
+                [_c("v-btn", [_vm._v("Login")])],
                 1
               )
             ],
@@ -96928,6 +96922,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var User = /*#__PURE__*/function () {
   function User() {
     _classCallCheck(this, User);
@@ -96943,7 +96938,8 @@ var User = /*#__PURE__*/function () {
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
-    }
+    } //Using For Store access token and User name
+
   }, {
     key: "responseAfterLogin",
     value: function responseAfterLogin(res) {
@@ -96952,6 +96948,49 @@ var User = /*#__PURE__*/function () {
 
       if (_Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(access_token)) {
         _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store(username, access_token);
+      }
+    } //Check if Token is Avilable Or Not
+
+  }, {
+    key: "hasToken",
+    value: function hasToken() {
+      var storedToken = _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken();
+
+      if (storedToken) {
+        return _Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(storedToken) ? true : false;
+      }
+
+      return false;
+    } //Check User is Logged in or not
+
+  }, {
+    key: "loggedIn",
+    value: function loggedIn() {
+      return this.hasToken();
+    } //Use for user logout
+
+  }, {
+    key: "logout",
+    value: function logout() {
+      _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+    } //Get Username using this functtion
+
+  }, {
+    key: "name",
+    value: function name() {
+      if (this.loggedIn()) {
+        return _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUser();
+      }
+    } //Get Id using this function
+
+  }, {
+    key: "id",
+    value: function id() {
+      if (this.loggedIn()) {
+        if (this.loggedIn()) {
+          var payload = _Token__WEBPACK_IMPORTED_MODULE_0__["default"].payload(_AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken());
+          return payload.sub;
+        }
       }
     }
   }]);
@@ -97022,6 +97061,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
 
 window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_2__["default"];
+console.log(_Helpers_User__WEBPACK_IMPORTED_MODULE_2__["default"].id());
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
