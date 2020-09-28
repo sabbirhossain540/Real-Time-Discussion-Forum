@@ -1,6 +1,14 @@
 <template>
   <v-container>
-      <v-form @submit.prevent="login">
+      <v-form @submit.prevent="signup">
+          <v-text-field
+            label="Name"
+            v-model="form.name"
+            type="Name"
+            required
+          ></v-text-field>
+
+
           <v-text-field
             label="Email"
             v-model="form.email"
@@ -15,22 +23,21 @@
             required
           ></v-text-field>
 
+          <v-text-field
+            label="Password"
+            v-model="form.password_confirmation"
+            type="password"
+            required
+          ></v-text-field>
+
           <v-btn
             color="green"
             type="submit"
           >
-              Login
+              Signup
           </v-btn>
 
-          <router-link to="/signup"><v-btn
-            color="blue"
-            type="submit"
-          >
-              Sign Up
-          </v-btn></router-link>
-
       </v-form>
-      
   </v-container>
 </template>
 
@@ -39,15 +46,19 @@ export default {
     data(){
         return{
             form: {
+                name:null,
                 email:null,
-                password:null
+                password:null,
+                password_confirmation:null
             }
         }
     },
 
     methods:{
-        login(){
-            User.login(this.form)
+        signup(){
+            axios.post('/api/auth/signup',this.form)
+            .then(res => User.responseAfterLogin(res))
+            .catch()
         }
     }
 }
