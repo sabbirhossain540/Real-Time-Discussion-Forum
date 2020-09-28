@@ -1,6 +1,9 @@
 <template>
     <div>
         <toolbar></toolbar>
+
+        <router-view></router-view>
+
         <app-footer></app-footer>
     </div>
     

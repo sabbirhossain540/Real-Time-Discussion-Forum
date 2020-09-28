@@ -1,7 +1,6 @@
 <template>
   <v-card
     color="grey lighten-4"
-    height="200px"
   >
     <v-toolbar dense>
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
@@ -19,9 +18,10 @@
             <v-btn flat>
                 Category
             </v-btn>
-            <v-btn flat>
-                Login
-            </v-btn>
+            <router-link to="/login">
+                <v-btn flat>Login</v-btn>
+            </router-link>
+            
       </v-toolbar-item>
 
      
