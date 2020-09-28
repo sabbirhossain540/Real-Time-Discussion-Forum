@@ -20036,16 +20036,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
         title: null,
         category_id: null,
-        body: null
+        body: 'scscs'
       },
-      categories: []
+      categories: [],
+      errors: {}
     };
   },
   created: function created() {
@@ -20057,7 +20057,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     create: function create() {
-      alert("ok");
+      var _this2 = this;
+
+      axios.post('/api/question', this.form).then(function (res) {
+        return console.log(res.data);
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
+      });
     }
   }
 });
@@ -57007,14 +57013,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("v-textarea", {
-            attrs: { solo: "", name: "input-7-4", label: "Solo textarea" },
-            model: {
-              value: _vm.body,
-              callback: function($$v) {
-                _vm.body = $$v
-              },
-              expression: "body"
-            }
+            attrs: { name: "body", label: "Solo textarea", "v-model": _vm.body }
           }),
           _vm._v(" "),
           _c("v-btn", { attrs: { color: "green", type: "submit" } }, [
@@ -116700,7 +116699,10 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window.Vue = require('vue');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const JWTtoken = `${localStorage.getItem('token')}`
+// alert(JWTtoken);
+// window.axios.defaults.headers.common['Authorization'] = JWTtoken;
+// window.Vue = require('vue');
 // import Vuetify from "../plugin/vutify";
 
 
@@ -116771,6 +116773,8 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var JWTtoken = "Bearer ".concat(localStorage.getItem('token'));
+window.axios.defaults.headers.common['Authorization'] = JWTtoken;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -20,10 +20,9 @@
             ></v-select>
 
             <v-textarea
-            solo
-            name="input-7-4"
+            name="body"
             label="Solo textarea"
-            v-model="body"
+            :v-model="body"
             ></v-textarea>
 
           <v-btn
@@ -42,9 +41,10 @@ export default {
             form:{
                 title:null,
                 category_id:null,
-                body:null
+                body:'scscs'
             },
-            categories:[]
+            categories:[],
+            errors:{}
         }
     },
     created(){
@@ -53,7 +53,9 @@ export default {
     },
     methods:{
         create(){
-            alert("ok");
+             axios.post('/api/question',this.form)
+             .then(res => console.log(res.data))
+             .catch(error=> this.errors = error.response.data.errors)
         }
     }
 }

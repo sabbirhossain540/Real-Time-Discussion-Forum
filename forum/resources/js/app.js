@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+// const JWTtoken = `${localStorage.getItem('token')}`
+// alert(JWTtoken);
+// window.axios.defaults.headers.common['Authorization'] = JWTtoken;
+
 // window.Vue = require('vue');
 
 // import Vuetify from "../plugin/vutify";
