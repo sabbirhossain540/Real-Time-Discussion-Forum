@@ -1,46 +1,29 @@
 <template>
-  <form>
-    
-    <v-text-field
-      v-model="email"
-      :error-messages="emailErrors"
-      label="E-mail"
-      type="email"
-      required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
-    ></v-text-field>
+  <v-container>
+      <v-form @submit.prevent="login">
+          <v-text-field
+            label="Email"
+            v-model="form.email"
+            type="email"
+            required
+          ></v-text-field>
 
-    <v-text-field
-      v-model="password"
-      :error-messages="passwordErrors"
-      :counter="10"
-      type="password"
-      label="Password"
-      required
-      @input="$v.password.$touch()"
-      @blur="$v.password.$touch()"
-    ></v-text-field>
+          <v-text-field
+            label="Password"
+            v-model="form.password"
+            type="password"
+            required
+          ></v-text-field>
 
-    <v-checkbox
-      v-model="checkbox"
-      :error-messages="checkboxErrors"
-      label="Do you agree?"
-      required
-      @change="$v.checkbox.$touch()"
-      @blur="$v.checkbox.$touch()"
-    ></v-checkbox>
+          <v-btn
+            color="green"
+            type="submit"
+          >
+              Login
+          </v-btn>
 
-    <v-btn
-      class="mr-4"
-      @click="submit"
-    >
-      submit
-    </v-btn>
-    <v-btn @click="clear">
-      clear
-    </v-btn>
-  </form>
+      </v-form>
+  </v-container>
 </template>
 
 <script>
@@ -51,6 +34,14 @@ export default {
                 email:null,
                 password:null
             }
+        }
+    },
+
+    methods:{
+        login(){
+            axios.post('/api/auth/login',this.form)
+            .then(res => console.log(res.data))
+            
         }
     }
 }

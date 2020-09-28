@@ -2042,23 +2042,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2067,6 +2050,13 @@ __webpack_require__.r(__webpack_exports__);
         password: null
       }
     };
+  },
+  methods: {
+    login: function login() {
+      axios.post('/api/auth/login', this.form).then(function (res) {
+        return console.log(res.data);
+      });
+    }
   }
 });
 
@@ -37788,85 +37778,47 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "form",
+    "v-container",
     [
-      _c("v-text-field", {
-        attrs: {
-          "error-messages": _vm.emailErrors,
-          label: "E-mail",
-          type: "email",
-          required: ""
-        },
-        on: {
-          input: function($event) {
-            return _vm.$v.email.$touch()
-          },
-          blur: function($event) {
-            return _vm.$v.email.$touch()
+      _c(
+        "v-form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
+            }
           }
         },
-        model: {
-          value: _vm.email,
-          callback: function($$v) {
-            _vm.email = $$v
-          },
-          expression: "email"
-        }
-      }),
-      _vm._v(" "),
-      _c("v-text-field", {
-        attrs: {
-          "error-messages": _vm.passwordErrors,
-          counter: 10,
-          type: "password",
-          label: "Password",
-          required: ""
-        },
-        on: {
-          input: function($event) {
-            return _vm.$v.password.$touch()
-          },
-          blur: function($event) {
-            return _vm.$v.password.$touch()
-          }
-        },
-        model: {
-          value: _vm.password,
-          callback: function($$v) {
-            _vm.password = $$v
-          },
-          expression: "password"
-        }
-      }),
-      _vm._v(" "),
-      _c("v-checkbox", {
-        attrs: {
-          "error-messages": _vm.checkboxErrors,
-          label: "Do you agree?",
-          required: ""
-        },
-        on: {
-          change: function($event) {
-            return _vm.$v.checkbox.$touch()
-          },
-          blur: function($event) {
-            return _vm.$v.checkbox.$touch()
-          }
-        },
-        model: {
-          value: _vm.checkbox,
-          callback: function($$v) {
-            _vm.checkbox = $$v
-          },
-          expression: "checkbox"
-        }
-      }),
-      _vm._v(" "),
-      _c("v-btn", { staticClass: "mr-4", on: { click: _vm.submit } }, [
-        _vm._v("\n    submit\n  ")
-      ]),
-      _vm._v(" "),
-      _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("\n    clear\n  ")])
+        [
+          _c("v-text-field", {
+            attrs: { label: "Email", type: "email", required: "" },
+            model: {
+              value: _vm.form.email,
+              callback: function($$v) {
+                _vm.$set(_vm.form, "email", $$v)
+              },
+              expression: "form.email"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: { label: "Password", type: "password", required: "" },
+            model: {
+              value: _vm.form.password,
+              callback: function($$v) {
+                _vm.$set(_vm.form, "password", $$v)
+              },
+              expression: "form.password"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { color: "green", type: "submit" } }, [
+            _vm._v("\n            Login\n        ")
+          ])
+        ],
+        1
+      )
     ],
     1
   )
