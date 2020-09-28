@@ -41,6 +41,12 @@ class AuthController extends Controller
 
 
     public function signup(Request $request){
+
+        $validateData = $request->validate([
+    		'email' => 'required |unique:users| max:25',
+    		'name' => 'required',
+    		'password' => 'required | min:6 | confirmed'
+    	]);
         
         User::create($request->all());
         return $this->login($request);
@@ -90,7 +96,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()->name
         ]);
     }
 }

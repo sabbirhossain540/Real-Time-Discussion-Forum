@@ -22,7 +22,15 @@
               Login
           </v-btn>
 
+          <router-link to="/signup"><v-btn
+            color="blue"
+            type="submit"
+          >
+              Sign Up
+          </v-btn></router-link>
+
       </v-form>
+      
   </v-container>
 </template>
 
@@ -39,10 +47,15 @@ export default {
 
     methods:{
         login(){
-            axios.post('/api/auth/login',this.form)
-            .then(res => console.log(res.data))
-            
+            User.login(this.form)
+            //Using for redirect path
+           // this.$router.push('forum')
         }
+    },
+    created(){
+      if(User.loggedIn()){
+        this.$router.push({name:'forum'})
+      }
     }
 }
 </script>

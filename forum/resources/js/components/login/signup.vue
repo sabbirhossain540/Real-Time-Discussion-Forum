@@ -1,0 +1,82 @@
+<template>
+  <v-container>
+      <v-form @submit.prevent="signup">
+          <v-text-field
+            label="Name"
+            v-model="form.name"
+            type="Name"
+            required
+          ></v-text-field>
+          <span class="red--text" v-if="errors.name">{{ errors.name[0] }}</span>
+
+
+          <v-text-field
+            label="Email"
+            v-model="form.email"
+            type="email"
+            required
+          ></v-text-field>
+          <span class="red--text" v-if="errors.email">{{ errors.email[0] }}</span>
+
+          <v-text-field
+            label="Password"
+            v-model="form.password"
+            type="password"
+            required
+          ></v-text-field>
+          <span class="red--text" v-if="errors.password">{{ errors.password[0] }}</span>
+
+          <v-text-field
+            label="Password"
+            v-model="form.password_confirmation"
+            type="password"
+            required
+          ></v-text-field>
+
+          <v-btn
+            color="green"
+            type="submit"
+          >
+              Signup
+          </v-btn>
+
+      </v-form>
+  </v-container>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+            form: {
+                name:null,
+                email:null,
+                password:null,
+                password_confirmation:null
+            },
+            errors:{}
+        }
+    },
+
+    methods:{
+        signup(){
+            axios.post('/api/auth/signup',this.form)
+            .then(res => {
+                User.responseAfterLogin(res)
+                //Using for redirect path
+                this.$router.push('forum')
+            })
+            .catch(error=> this.errors = error.response.data.errors)
+        }
+    },
+    created(){
+      if(User.loggedIn()){
+        this.$router.push({name:'forum'})
+      }
+    }
+}
+</script>
+
+<style lang="stylus" scoped>
+
+</style>
