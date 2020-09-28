@@ -61,7 +61,11 @@ export default {
     methods:{
         signup(){
             axios.post('/api/auth/signup',this.form)
-            .then(res => User.responseAfterLogin(res))
+            .then(res => {
+                User.responseAfterLogin(res)
+                //Using for redirect path
+                this.$router.push('forum')
+            })
             .catch(error=> this.errors = error.response.data.errors)
         }
     }

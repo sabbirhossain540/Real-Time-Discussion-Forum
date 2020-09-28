@@ -9,9 +9,12 @@
        <v-spacer></v-spacer>
 
       <v-toolbar-item>
-          <v-btn>
+        <router-link to="/forum">
+                 <v-btn>
                 Forum
             </v-btn>
+            </router-link>
+         
             <v-btn>
                 Ask Question
             </v-btn>

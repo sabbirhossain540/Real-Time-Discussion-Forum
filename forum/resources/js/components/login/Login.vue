@@ -48,6 +48,8 @@ export default {
     methods:{
         login(){
             User.login(this.form)
+            //Using for redirect path
+            this.$router.push('forum')
         }
     }
 }
