@@ -2018,7 +2018,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: {
+        email: null,
+        password: null
+      }
+    };
+  }
+});
 
 /***/ }),
 
@@ -37737,7 +37787,89 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Login")])
+  return _c(
+    "form",
+    [
+      _c("v-text-field", {
+        attrs: {
+          "error-messages": _vm.emailErrors,
+          label: "E-mail",
+          type: "email",
+          required: ""
+        },
+        on: {
+          input: function($event) {
+            return _vm.$v.email.$touch()
+          },
+          blur: function($event) {
+            return _vm.$v.email.$touch()
+          }
+        },
+        model: {
+          value: _vm.email,
+          callback: function($$v) {
+            _vm.email = $$v
+          },
+          expression: "email"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-text-field", {
+        attrs: {
+          "error-messages": _vm.passwordErrors,
+          counter: 10,
+          type: "password",
+          label: "Password",
+          required: ""
+        },
+        on: {
+          input: function($event) {
+            return _vm.$v.password.$touch()
+          },
+          blur: function($event) {
+            return _vm.$v.password.$touch()
+          }
+        },
+        model: {
+          value: _vm.password,
+          callback: function($$v) {
+            _vm.password = $$v
+          },
+          expression: "password"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-checkbox", {
+        attrs: {
+          "error-messages": _vm.checkboxErrors,
+          label: "Do you agree?",
+          required: ""
+        },
+        on: {
+          change: function($event) {
+            return _vm.$v.checkbox.$touch()
+          },
+          blur: function($event) {
+            return _vm.$v.checkbox.$touch()
+          }
+        },
+        model: {
+          value: _vm.checkbox,
+          callback: function($$v) {
+            _vm.checkbox = $$v
+          },
+          expression: "checkbox"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-btn", { staticClass: "mr-4", on: { click: _vm.submit } }, [
+        _vm._v("\n    submit\n  ")
+      ]),
+      _vm._v(" "),
+      _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("\n    clear\n  ")])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
