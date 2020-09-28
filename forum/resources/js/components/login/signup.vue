@@ -7,6 +7,7 @@
             type="Name"
             required
           ></v-text-field>
+          <span class="red--text" v-if="errors.name">{{ errors.name[0] }}</span>
 
 
           <v-text-field
@@ -15,6 +16,7 @@
             type="email"
             required
           ></v-text-field>
+          <span class="red--text" v-if="errors.email">{{ errors.email[0] }}</span>
 
           <v-text-field
             label="Password"
@@ -22,6 +24,7 @@
             type="password"
             required
           ></v-text-field>
+          <span class="red--text" v-if="errors.password">{{ errors.password[0] }}</span>
 
           <v-text-field
             label="Password"
@@ -50,7 +53,8 @@ export default {
                 email:null,
                 password:null,
                 password_confirmation:null
-            }
+            },
+            errors:{}
         }
     },
 
@@ -58,7 +62,7 @@ export default {
         signup(){
             axios.post('/api/auth/signup',this.form)
             .then(res => User.responseAfterLogin(res))
-            .catch()
+            .catch(error=> this.errors = error.response.data.errors)
         }
     }
 }
