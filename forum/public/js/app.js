@@ -1996,15 +1996,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      items: [{
+        title: 'Forum',
+        to: '/forum',
+        show: true
+      }, {
+        title: 'Ask Question',
+        to: '/ask',
+        show: User.loggedIn()
+      }, {
+        title: 'Category',
+        to: '/category',
+        show: User.loggedIn()
+      }, {
+        title: 'Login',
+        to: '/login',
+        show: !User.loggedIn()
+      }, {
+        title: 'Logout',
+        to: '/forum',
+        show: User.loggedIn()
+      }]
+    };
+  }
+});
 
 /***/ }),
 
@@ -2084,6 +2102,13 @@ __webpack_require__.r(__webpack_exports__);
       User.login(this.form); //Using for redirect path
 
       this.$router.push('forum');
+    }
+  },
+  created: function created() {
+    if (User.loggedIn()) {
+      this.$router.push({
+        name: 'forum'
+      });
     }
   }
 });
@@ -2167,6 +2192,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push('forum');
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
+      });
+    }
+  },
+  created: function created() {
+    if (User.loggedIn()) {
+      this.$router.push({
+        name: 'forum'
       });
     }
   }
@@ -37838,25 +37870,16 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-toolbar-item",
-            [
-              _c(
-                "router-link",
-                { attrs: { to: "/forum" } },
-                [_c("v-btn", [_vm._v("\n              Forum\n          ")])],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-btn", [_vm._v("\n              Ask Question\n          ")]),
-              _vm._v(" "),
-              _c("v-btn", [_vm._v("\n              Category\n          ")]),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { attrs: { to: "/login" } },
-                [_c("v-btn", [_vm._v("Login")])],
-                1
-              )
-            ],
+            _vm._l(_vm.items, function(item) {
+              return item.show
+                ? _c(
+                    "router-link",
+                    { key: item.title, attrs: { to: item.to } },
+                    [_c("v-btn", [_vm._v(_vm._s(item.title))])],
+                    1
+                  )
+                : _vm._e()
+            }),
             1
           )
         ],

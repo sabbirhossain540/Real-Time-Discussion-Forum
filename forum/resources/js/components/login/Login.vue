@@ -51,6 +51,11 @@ export default {
             //Using for redirect path
             this.$router.push('forum')
         }
+    },
+    created(){
+      if(User.loggedIn()){
+        this.$router.push({name:'forum'})
+      }
     }
 }
 </script>
