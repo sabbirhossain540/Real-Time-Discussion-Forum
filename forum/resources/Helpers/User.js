@@ -15,6 +15,7 @@ class User{
         const username = res.data.user
         if(Tokens.isValid(access_token)){
             AppStorage.store(username, access_token)
+            window.location = '/forum'
         }
 
     }
@@ -32,11 +33,13 @@ class User{
     //Check User is Logged in or not
     loggedIn(){
         return this.hasToken()
+        
     }
 
     //Use for user logout
     logout(){
         AppStorage.clear()
+        window.location = '/forum'
     }
 
     //Get Username using this functtion

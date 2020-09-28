@@ -39,10 +39,16 @@ export default {
             {title: 'Ask Question', to:'/ask', show:User.loggedIn()},
             {title: 'Category', to:'/category', show:User.loggedIn()},
             {title: 'Login', to:'/login', show:!User.loggedIn()},
-            {title: 'Logout', to:'/forum', show:User.loggedIn()},
+            {title: 'Logout', to:'/logout', show:User.loggedIn()},
 
           ]
       }
+    },
+
+    created(){
+      EventBus.$on('logout', () => {
+        User.logout()
+      })
     }
 }
 </script>

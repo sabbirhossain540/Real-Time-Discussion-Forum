@@ -49,7 +49,7 @@ export default {
         login(){
             User.login(this.form)
             //Using for redirect path
-            this.$router.push('forum')
+           // this.$router.push('forum')
         }
     },
     created(){
