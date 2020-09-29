@@ -20020,12 +20020,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
         name: null
-      }
+      },
+      categories: {}
     };
   },
   methods: {
@@ -20034,6 +20065,13 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(res.data);
       });
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/category').then(function (res) {
+      return _this.categories = res.data;
+    });
   }
 });
 
@@ -57102,6 +57140,7 @@ var render = function() {
       _c(
         "v-form",
         {
+          staticClass: "mb-5",
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -57124,6 +57163,76 @@ var render = function() {
           _c("v-btn", { attrs: { color: "teal", type: "submit" } }, [
             _vm._v("Create")
           ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card",
+        { staticClass: "mx-auto" },
+        [
+          _c(
+            "v-toolbar",
+            { attrs: { color: "indigo", dark: "" } },
+            [_c("v-toolbar-title", [_vm._v("Category List")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list",
+            _vm._l(_vm.categories, function(category) {
+              return _c(
+                "v-list-item",
+                { key: category.id },
+                [
+                  _c(
+                    "v-list-item-action",
+                    [
+                      _c(
+                        "v-btn",
+                        { attrs: { icon: "", small: "" } },
+                        [
+                          _c("v-icon", { attrs: { color: "orange" } }, [
+                            _vm._v("edit")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v(_vm._s(category.name))])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-action",
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { icon: "", small: "" },
+                          on: { click: _vm.destroy }
+                        },
+                        [
+                          _c("v-icon", { attrs: { color: "red" } }, [
+                            _vm._v("delete")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
         ],
         1
       )
