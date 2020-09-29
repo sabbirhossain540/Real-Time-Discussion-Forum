@@ -20217,8 +20217,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['data']
+  props: ['data'],
+  data: function data() {
+    return {
+      own: User.id()
+    };
+  },
+  methods: {
+    destroy: function destroy() {
+      var _this = this;
+
+      axios["delete"]('/api/question/' + this.data.slug).then(function (res) {
+        return _this.$router.push('/forum');
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -57209,7 +57234,40 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-card-text", { domProps: { innerHTML: _vm._s(_vm.data.body) } })
+          _c("v-card-text", { domProps: { innerHTML: _vm._s(_vm.data.body) } }),
+          _vm._v(" "),
+          _vm.own == _vm.data.user_id
+            ? _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    { attrs: { icon: "", small: "" } },
+                    [
+                      _c("v-icon", { attrs: { color: "orange" } }, [
+                        _vm._v("edit")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", small: "" },
+                      on: { click: _vm.destroy }
+                    },
+                    [
+                      _c("v-icon", { attrs: { color: "red" } }, [
+                        _vm._v("delete")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e()
         ],
         1
       )
@@ -116607,6 +116665,13 @@ var User = /*#__PURE__*/function () {
           return payload.sub;
         }
       }
+    }
+  }, {
+    key: "own",
+    value: function own(id) {
+      alert(this.id());
+      alert(id);
+      return this.id() == id;
     }
   }]);
 

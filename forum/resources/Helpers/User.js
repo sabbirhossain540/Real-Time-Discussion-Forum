@@ -58,6 +58,12 @@ class User{
             }
         }
     }
+
+    own(id){
+        alert(this.id());
+        alert(id);
+        return this.id() == id
+    }
 }
 
 
