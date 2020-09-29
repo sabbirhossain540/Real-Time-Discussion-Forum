@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+// const JWTtoken = `${localStorage.getItem('token')}`
+// alert(JWTtoken);
+// window.axios.defaults.headers.common['Authorization'] = JWTtoken;
+
 // window.Vue = require('vue');
 
 // import Vuetify from "../plugin/vutify";
@@ -17,6 +21,14 @@ import User from '../Helpers/User'
 window.User = User
 
 window.EventBus = new Vue();
+
+
+//Using Vue Markdown
+import VueSimplemde from 'vue-simplemde'
+import 'simplemde/dist/simplemde.min.css'
+Vue.component('vue-simplemde', VueSimplemde)
+Vue.use(VueSimplemde)
+
 
 /**
  * The following block of code may be used to automatically register your
