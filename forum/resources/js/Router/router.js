@@ -9,6 +9,7 @@ import Forum from '../components/forum/forum'
 import Logout from '../components/login/logout'
 import Read from '../components/forum/read'
 import Create from '../components/forum/create'
+import CategoryForm from '../components/category/createCategory'
 
 
 const routes = [
@@ -18,6 +19,8 @@ const routes = [
     { path: '/forum', component: Forum , name:'forum' },
     { path: '/question/:slug', component: Read , name:'read' },
     { path: '/ask', component: Create , name:'create' },
+    { path: '/category', component: CategoryForm , name:'category' },
+
   ]
 
 
