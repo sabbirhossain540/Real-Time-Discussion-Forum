@@ -20061,16 +20061,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     create: function create() {
+      var _this = this;
+
       axios.post('/api/category', this.form).then(function (res) {
-        return console.log(res.data);
+        _this.categories.unshift(res.data);
+
+        _this.form.name = null;
+      });
+    },
+    destroy: function destroy(slug) {
+      var _this2 = this;
+
+      axios["delete"]('/api/category/' + slug).then(function (res) {
+        return _this2.$router.push('/category');
       });
     }
   },
   created: function created() {
-    var _this = this;
+    var _this3 = this;
 
     axios.get('/api/category').then(function (res) {
-      return _this.categories = res.data;
+      return _this3.categories = res.data;
     });
   }
 });
@@ -57215,7 +57226,11 @@ var render = function() {
                         "v-btn",
                         {
                           attrs: { icon: "", small: "" },
-                          on: { click: _vm.destroy }
+                          on: {
+                            click: function($event) {
+                              return _vm.destroy(category.slug)
+                            }
+                          }
                         },
                         [
                           _c("v-icon", { attrs: { color: "red" } }, [

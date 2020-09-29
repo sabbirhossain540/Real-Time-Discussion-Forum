@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = str_slug($request->name);
         $category->save();
-        return response('Created Successfully');
+        return response($cat);
     }
 
     /**

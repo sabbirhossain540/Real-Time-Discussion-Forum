@@ -37,7 +37,7 @@
                 </v-list-item-content>
 
                 <v-list-item-action>
-                <v-btn icon small @click="destroy">
+                <v-btn icon small @click="destroy(category.slug)">
                     <v-icon color="red">delete</v-icon>
                 </v-btn>
                 </v-list-item-action>
@@ -62,7 +62,15 @@ export default {
     methods:{
         create(){
             axios.post('/api/category',this.form)
-            .then(res => console.log(res.data))
+            .then(res => {
+                this.categories.unshift(res.data)
+                this.form.name = null
+            })
+        },
+
+        destroy(slug){
+            axios.delete('/api/category/'+slug)
+            .then(res =>this.$router.push('/category'))
         }
     },
     created(){
