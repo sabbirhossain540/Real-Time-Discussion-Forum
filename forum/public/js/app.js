@@ -20060,7 +20060,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.post('/api/question', this.form).then(function (res) {
-        return console.log(res.data);
+        return _this2.$router.push(res.data.path);
       })["catch"](function (error) {
         return _this2.errors = error.response.data.errors;
       });
